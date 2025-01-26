@@ -1,0 +1,10 @@
+čo sa nezaplaví?
+Označ štvorčeky, ktoré sa nezaplavia.
+0010011
+1101010
+0011100
+0101001
+1011111
+squares
+1,2 3,2
+all

@@ -1,0 +1,238 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('závažia.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+}/* General Styles */
+
+/* Intro Page Styles */
+.containerintro {
+    width: 80%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.9);
+    align-items: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Header Section */
+.menu-left {
+    flex: 1;
+    height: 2px;
+    margin-top: -170px;
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+}
+
+.menu-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+}
+
+.tabulka-button{
+    display: flex;
+    margin-right: 0px;
+    margin-top: 0px ;
+}
+.header {
+    display: flex;
+    justify-content: space-between; /* Align left, center, and right */
+    align-items: center; /* Align vertically */
+    position: relative; /* Ensure correct positioning */
+}
+
+.level {
+    flex: 1;
+    font-size: 3rem;
+    text-align: center;
+    color: white;
+    margin-top: -50px;
+}
+
+/* Game Container */
+.container {
+    width: 100%;
+}
+
+.game-container {
+    display: flex;
+
+    padding: 20px;
+}
+
+/* Left Panel */
+.left-panel {
+    width: 15%;
+    display: block;
+    margin-left: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.left-panel button {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.left-panel button:hover {
+    transform: scale(1.2);
+}
+
+/* Main Area */
+.main-area {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.table-area {
+    position: absolute;
+    left: 250px; /* Adjust as necessary */
+    bottom: 260px; /* Adjust to align with the table */
+    z-index: 3; /* Ensure it’s above the table background */
+}
+
+.draggable-item {
+    width: 110px; /* Adjust the size */
+    height: auto; /* Maintain aspect ratio */
+    cursor: grab; /* Indicate it's draggable */
+}
+
+.draggable-item:active {
+    cursor: grabbing; /* Change cursor while dragging */
+}
+
+
+/* Updated Shelves Container */
+/* Updated Shelves Container */
+.shelves-container {
+    position: absolute; /* Positioned relative to the game area */
+top: 50px;
+    right: 20px; /* Align to the right side */
+    width: 300px; /* Width of the shelves container */
+    display: grid; /* Use grid for layout */
+    grid-template-columns: repeat(2, 1fr); /* Two weights per row */
+
+    background-color: transparent; /* No background for shelves */
+    justify-items: center; /* Center weights horizontally */
+    align-items: center; /* Center weights vertically */
+}
+
+/* Updated Weight Styles */
+.weight {
+    cursor: grab; /* Indicate draggable */
+    width: 100px; /* Set weight size */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Ensure no margin affects layout */
+    position: static; /* Ensure weights do not override grid layout */
+}
+
+
+/* Scale Area */
+.scale-area {
+    position: relative;
+    width: 500px; /* Adjust as necessary */
+    height: 300px; /* Adjust as necessary */
+    margin: 0 auto; /* Center the scale */
+}
+
+/* Central Stand (vaha-stred.png) */
+#scaleImage {
+    position: absolute;
+    top: -100px; /* Position of the central stand */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-45%); /* Adjust for centering */
+    width: 120%; /* Adjust size */
+    z-index: 1; /* Ensure it’s below the arms */
+}
+
+/* Rotating Arms (vaha-rameno.png) */
+#rotating-arm {
+    position: absolute;
+    top: -160px; /* Adjust position above the central stand */
+    left: 59%; /* Center horizontally */
+    transform-origin: center; /* Define rotation point */
+    transform: translateX(-50%) rotate(0deg); /* Default to no rotation */
+    width: 600px; /* Adjust size */
+    z-index: 2; /* Ensure it's above the central stand */
+}
+
+/* Left and Right Pans */
+.pan {
+    position: absolute;
+    width: 100px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    z-index: 3; /* Ensure pans are above other elements */
+    display: flex; /* To center the pan image */
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* Remove any background color */
+}
+
+#left-pan {
+    background: #654321;
+    top: 210px; /* Position relative to the rotating arm */
+    left: calc(50% - 210px); /* Align to the left of the scale */
+}
+
+#right-pan {    background: #654321;
+    top: 210px; /* Position relative to the rotating arm */
+    left: calc(50% + 160px); /* Align to the right of the scale */
+}
+
+.pan-image-left {
+    width: 250px; /* Make the image fit the pan */
+    pointer-events: none; /* Prevent dragging the pan image itself */
+}
+.pan-image-right{
+    width: 250px; /* Make the image fit the pan */
+    pointer-events: none; /* Prevent dragging the pan image itself */
+}
+
+/* Task Info */
+/* Scale Container */
+.scale-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Align scale and text vertically */
+    margin: 0 auto; /* Center the container within its parent */
+    width: 100%; /* Ensure full-width alignment */
+    max-width: 600px; /* Optional: restrict maximum width */
+    text-align: center; /* Center task text */
+}
+
+
+/* Task Info */
+.task-info {
+    margin-top: 150px; /* Space between scale and text */
+    font-size: 1.2rem;
+    text-align: center;
+    color: white; /* Match the white color from the screenshot */
+    padding: 10px 10px; /* Add padding for readability */
+    width: fit-content; /* Ensure it fits the content */
+}
+
+
+/* Buttons and Hover Effects */
+.menu button, .left-panel button {
+    background-color: white;
+    opacity: 0.8;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu button:hover, .left-panel button:hover {
+    background-color: lightgoldenrodyellow;
+}

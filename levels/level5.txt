@@ -1,0 +1,10 @@
+za koľko sekúnd?
+Za koľko sekúnd sa zaplaví celé územie?
+00110
+11010
+00010
+01000
+10011
+number
+4
+all

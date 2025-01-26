@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating Mode - Váženie</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <!-- Create Header -->
+    <div class="header">
+        <button id="switchModeButton"><img src="tabulka-hraj.png" alt="Play Mode"></button>
+        <h1>Creating Mode</h1>
+        <div class="weights-header">
+            <img src="tabulka-zavazia.png" alt="Weights">
+        </div>
+    </div>
+
+    <!-- Creating Area -->
+    <div class="creating-area">
+        <div class="scale">
+            <img src="vaha-stred.png" alt="Scale">
+        </div>
+        <div class="weights">
+            <img src="weight-1.png" alt="Weight 1" draggable="true">
+            <img src="weight-3.png" alt="Weight 3" draggable="true">
+            <img src="weight-9.png" alt="Weight 9" draggable="true">
+            <img src="weight-27.png" alt="Weight 27" draggable="true">
+            <img src="weight-81.png" alt="Weight 81" draggable="true">
+        </div>
+        <div class="task-info">
+            <p>Create your task by dragging weights onto the scale and setting a target weight for balance.</p>
+            <button id="saveTask">Save Task</button>
+            <button id="loadTask">Load Task</button>
+        </div>
+    </div>
+
+    <!-- Task Panel -->
+    <div class="panel">
+        <h2>Creating Level: <span id="level">1</span></h2>
+        <div class="level-nav">
+            <button id="previousLevel">&lt;</button>
+            <button id="nextLevel">&gt;</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('switchModeButton').addEventListener('click', function() {
+        window.location.href = 'playingmode.html';
+    });
+</script>
+</body>
+</html>

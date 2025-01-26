@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Váženie - EduSoft2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="containerintro">
+    <h1 style="font-family: Monaco,serif; text-align: center; color: #A7877B; font-size: 52px">Váženie</h1>
+
+  <main>
+    <div class="intro" style="text-align: center">
+      <p>Vitajte vo Váženie, edukačný program na pochopenie konceptu váh pomocou interaktívneho prostredia!</p>
+    </div>
+
+    <div class="menu">
+      <button id="playModeButton"><img src="tabulka-hraj.png" style="width: 250px; height: auto"></button>
+      <button id="createModeButton"><img src="tabulka-vytvaraj.png" style="width: 250px; height: auto"></button>
+    </div>
+  </main>
+
+  <footer>
+    <p>EduSoft2 2024/25 - Vanesa Šoošová</p>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('playModeButton').addEventListener('click', function() {
+    window.location.href = 'playingmode.html';
+  });
+
+  document.getElementById('createModeButton').addEventListener('click', function() {
+    window.location.href = 'creatingmode.html';
+  });
+</script>
+</body>
+</html>

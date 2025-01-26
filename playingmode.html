@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Váženie - Hranie</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <!-- Header Section -->
+  <div class="header">
+    <div class="menu-left">
+      <button id="switchModeButton" class="tabulka-button">
+        <img src="tabulka-vytvaraj.png" alt="Vytváranie" style="height: 140px; width: auto">
+      </button>
+    </div>
+    <div class="level">
+      <span id="currentLevel">1.</span>
+    </div>
+    <div class="menu-right">
+      <img src="tabulka-zavazia.png" alt="Závažia" style="margin-right: 0px; margin-top: 0px;  height: 140px;">
+    </div>
+  </div>
+
+  <!-- Main Game Area -->
+  <div class="game-container">
+    <div class="left-panel">
+      <button style="color: #654321; margin-top: 35px;
+    background-color: transparent; font-size: 20px;" id="startWeighing">Spusti váženie</button>
+      <button style="margin-top: 35px; color: #654321;
+    background-color: transparent; font-size: 20px;" id="restartGame">Hraj odznova</button>
+      <button style="margin-top: 48px; color: #654321;
+    background-color: transparent; font-size: 20px;" id="loadLevel">Načítaj level</button>
+      <button style="margin-top: 35px; color: #654321;
+    background-color: transparent; font-size: 20px;" id="saveLevel">Ulož level</button>
+    </div>
+
+    <div class="main-area">
+      <!-- Shelves for Weights -->
+      <div class="shelves-container" id="shelves"></div>
+
+      <!-- Scale -->
+      <div class="scale-area">
+        <!-- Central Stand -->
+        <img id="scaleImage" src="vaha-stred.png" alt="Scale Stand">
+
+        <!-- Rotating Arm -->
+        <img id="rotating-arm" src="vaha-rameno.png" alt="Rotating Arm">
+
+        <!-- Left and Right Pans -->
+        <div id="left-pan" class="pan">
+          <img src="vaha-strana.png" alt="Left Pan" class="pan-image-left">
+        </div>
+
+        <div id="right-pan" class="pan">
+          <img src="vaha-strana.png" alt="Right Pan" class="pan-image-right">
+        </div>
+
+      </div>
+      <div class="task-info">
+        <p>Zadanie úlohy...</p>
+      </div>
+      <div class="table-area">
+        <img src="bylinky.png" alt="Bylinky" class="draggable-item" id="bylinky" draggable="true">
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
