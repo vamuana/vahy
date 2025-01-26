@@ -19,6 +19,13 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.menu {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 20px; /* Add some spacing between the buttons */
+    margin-top: 20px; /* Optional: Add margin above for better spacing */
+}
 
 /* Header Section */
 .menu-left {
