@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             img.style.position = "absolute";
             img.style.left = `${(index % 2) * 150}px`;
-            img.style.top = `${Math.floor(index / 2) * 100}px`;
+            img.style.top = `${Math.floor(index / 2) * 150}px`;
 
             shelvesContainer.appendChild(img);
         });
