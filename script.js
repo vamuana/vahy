@@ -69,20 +69,43 @@ document.addEventListener("DOMContentLoaded", () => {
             let weightElement = isJar ? jar : document.querySelector(`[data-weight='${weight}']`);
 
             if (weightElement) {
+                weightElement.style.position = "relative";
+                weightElement.style.left = "0";
+                weightElement.style.top = "0";
+
                 const container = document.createElement("div");
                 container.classList.add("weight-container");
                 container.appendChild(weightElement);
                 target.appendChild(container);
+                adjustScalePosition();
                 calculateBalance();
             }
         });
     });
+
+    function adjustScalePosition() {
+        const leftWeight = Array.from(leftPan.querySelectorAll("[data-weight]"))
+            .map((item) => parseInt(item.dataset.weight))
+            .reduce((sum, val) => sum + val, 0);
+
+        const rightWeight = Array.from(rightPan.querySelectorAll("[data-weight]"))
+            .map((item) => parseInt(item.dataset.weight))
+            .reduce((sum, val) => sum + val, 0);
+
+        const scaleOffset = (rightWeight - leftWeight) * 5; // Adjust sensitivity
+        leftPan.style.transform = `translateY(${Math.max(-scaleOffset, 0)}px)`;
+        rightPan.style.transform = `translateY(${Math.max(scaleOffset, 0)}px)`;
+
+        leftPan.style.marginTop = "-50px"; // Ensures both start aligned at the same level
+        rightPan.style.marginTop = "-50px";
+    }
 
     [leftPan, rightPan].forEach((pan) => {
         pan.addEventListener("click", (event) => {
             const weightElement = event.target.closest("[data-weight]");
             if (weightElement) {
                 shelvesContainer.appendChild(weightElement);
+                adjustScalePosition();
                 calculateBalance();
             }
         });
@@ -114,6 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function resetScale() {
         rotatingArm.style.transform = `translateX(-50%) rotate(0deg)`;
+        leftPan.style.transform = "translateY(0px)";
+        rightPan.style.transform = "translateY(0px)";
         leftPan.innerHTML = "";
         rightPan.innerHTML = "";
     }

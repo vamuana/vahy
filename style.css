@@ -148,18 +148,24 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
 }
+#left-pan,
+#right-pan {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    top: 50%; /* Ensures vertical centering */
+    transform: translateY(-50%);
+    z-index: 3; /* Ensure pans are above the background */
+}
 
 #left-pan {
-    left: calc(50% - 200px);
-    top: 50%;
-    transform: translateY(-50%);
+    left: calc(50% - 230px); /* Adjusted for horizontal alignment */
 }
 
 #right-pan {
-    left: calc(50% + 50px);
-    top: 50%;
-    transform: translateY(-50%);
+    left: calc(50% + 150px); /* Adjusted for horizontal alignment */
 }
+
 
 .pan-image-left,
 .pan-image-right {
