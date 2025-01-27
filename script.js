@@ -1,34 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
     const leftPan = document.getElementById("left-pan");
     const rightPan = document.getElementById("right-pan");
-    const scaleImage = document.getElementById("scaleImage");
+    const shelvesContainer = document.getElementById("shelves");
+    const rotatingArm = document.getElementById("rotating-arm");
     const taskInfo = document.querySelector(".task-info");
+    const jar = document.getElementById("bylinky");
     let currentLevel = 1;
+    let correctWeight = 0;
+    let jarWeight = 0;
 
-    // Function to fetch weights for a level
-    function fetchWeightsForLevel(level) {
+    // Fetch level data
+    function fetchLevelData(level) {
         fetch(`levels/level${level}.txt`)
-            .then(response => response.text())
-            .then(data => {
-                const weights = data.split("\n").map(line => line.trim()).filter(line => line && !isNaN(line)).map(Number);
-                console.log("Loaded weights for level", level, weights); // Debugging line
+            .then((response) => response.text())
+            .then((data) => {
+                const lines = data.split("\n").map((line) => line.trim());
+                const task = lines[0];
+                const weights = lines.slice(1, lines.indexOf("P") || lines.indexOf("L") || lines.indexOf("M")).map(Number);
+                jarWeight = parseInt(task.match(/\d+/)[0]);
+                correctWeight = jarWeight;
+                taskInfo.textContent = task;
                 placeWeightsOnShelves(weights);
-                taskInfo.textContent = `Úloha: Vyrovnajte váhy pre level ${level}.`;
+                makeJarDraggable();
+                resetScale();
             })
-            .catch(err => {
-                console.error("Failed to load level weights:", err);
+            .catch((err) => {
+                console.error("Failed to load level data:", err);
                 taskInfo.textContent = `Chyba pri načítaní levelu ${level}.`;
             });
     }
 
-
-
-    // Function to dynamically create and place weight images on shelves
     function placeWeightsOnShelves(weights) {
-        const shelvesContainer = document.getElementById("shelves");
-        shelvesContainer.innerHTML = ""; // Clear existing weights
-
-        // Dynamically distribute weights on shelves
+        shelvesContainer.innerHTML = "";
         weights.forEach((weight, index) => {
             const img = document.createElement("img");
             img.src = `zavazia/${weight}-removebg-preview.png`;
@@ -36,69 +39,95 @@ document.addEventListener("DOMContentLoaded", () => {
             img.classList.add("weight");
             img.dataset.weight = weight;
 
-            // Set dynamic positions for the weights
-            img.style.position = "absolute";
-            img.style.left = `${(index % 2) * 100 + 20}px`; // Alternating left positions
-            img.style.top = `${Math.floor(index / 2) * 160 + 20}px`; // Move down as rows fill
-
-            // Add drag-and-drop functionality to the weights
             img.addEventListener("dragstart", (event) => {
-                event.dataTransfer.setData("text", event.target.dataset.weight);
+                event.dataTransfer.setData("weight", JSON.stringify({ type: "weight", value: weight }));
             });
+
+            img.style.position = "absolute";
+            img.style.left = `${(index % 2) * 150}px`;
+            img.style.top = `${Math.floor(index / 2) * 100}px`;
 
             shelvesContainer.appendChild(img);
         });
-
-        console.log("Weights placed on shelves:", weights); // Debugging line
     }
 
-
-
-    // Drag-and-drop handling for pans
-    [leftPan, rightPan].forEach((pan) => {
-        pan.addEventListener("dragover", (event) => {
-            event.preventDefault(); // Allow dropping
+    function makeJarDraggable() {
+        jar.dataset.weight = jarWeight;
+        jar.addEventListener("dragstart", (event) => {
+            event.dataTransfer.setData("weight", JSON.stringify({ type: "jar", value: jarWeight }));
         });
+    }
 
-        pan.addEventListener("drop", (event) => {
+    [leftPan, rightPan, shelvesContainer].forEach((target) => {
+        target.addEventListener("dragover", (event) => event.preventDefault());
+        target.addEventListener("drop", (event) => {
             event.preventDefault();
-            const weight = event.dataTransfer.getData("text");
-            const weightElement = document.querySelector(`[data-weight='${weight}']`);
+            const data = JSON.parse(event.dataTransfer.getData("weight"));
+            const isJar = data.type === "jar";
+            const weight = data.value;
+
+            let weightElement = isJar ? jar : document.querySelector(`[data-weight='${weight}']`);
+
             if (weightElement) {
-                pan.appendChild(weightElement); // Place the weight on the pan
-                calculateBalance(); // Update the balance logic
+                const container = document.createElement("div");
+                container.classList.add("weight-container");
+                container.appendChild(weightElement);
+                target.appendChild(container);
+                calculateBalance();
             }
         });
     });
 
-    // Function to calculate balance and adjust the scale's rotation
+    [leftPan, rightPan].forEach((pan) => {
+        pan.addEventListener("click", (event) => {
+            const weightElement = event.target.closest("[data-weight]");
+            if (weightElement) {
+                shelvesContainer.appendChild(weightElement);
+                calculateBalance();
+            }
+        });
+    });
+
     function calculateBalance() {
-        const leftWeight = Array.from(leftPan.children)
+        const leftWeight = Array.from(leftPan.querySelectorAll("[data-weight]"))
             .map((item) => parseInt(item.dataset.weight))
             .reduce((sum, val) => sum + val, 0);
 
-        const rightWeight = Array.from(rightPan.children)
+        const rightWeight = Array.from(rightPan.querySelectorAll("[data-weight]"))
             .map((item) => parseInt(item.dataset.weight))
             .reduce((sum, val) => sum + val, 0);
 
-        const rotation = (rightWeight - leftWeight) * 2; // Adjust sensitivity
-        const rotatingArm = document.getElementById("rotating-arm");
+        const rotation = (rightWeight - leftWeight) * 3;
         rotatingArm.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+
+        checkSolution(leftWeight, rightWeight);
     }
 
+    function checkSolution(leftWeight, rightWeight) {
+        const totalWeight = leftWeight + rightWeight;
+        if (totalWeight === correctWeight) {
+            taskInfo.textContent = "Správne! Úloha splnená.";
+        } else {
+            taskInfo.textContent = `Úloha: Vyrovnajte váhy pre ${correctWeight} gramov.`;
+        }
+    }
 
-    // Restart the game to the first level
+    function resetScale() {
+        rotatingArm.style.transform = `translateX(-50%) rotate(0deg)`;
+        leftPan.innerHTML = "";
+        rightPan.innerHTML = "";
+    }
+
     document.getElementById("restartGame").addEventListener("click", () => {
         currentLevel = 1;
-        fetchWeightsForLevel(currentLevel);
-        scaleImage.style.transform = "rotate(0)";
+        fetchLevelData(currentLevel);
+        resetScale();
     });
 
-    // Reload the current level
     document.getElementById("loadLevel").addEventListener("click", () => {
-        fetchWeightsForLevel(currentLevel);
+        fetchLevelData(currentLevel);
+        resetScale();
     });
 
-    // Initialize the first level
-    fetchWeightsForLevel(currentLevel);
+    fetchLevelData(currentLevel);
 });
