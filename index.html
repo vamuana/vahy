@@ -3,66 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Váženie - Hranie</title>
+  <title>Váženie - EduSoft2</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-  <!-- Header Section -->
-  <div class="header">
-    <div class="menu-left">
-      <button id="switchModeButton" class="tabulka-button">
-        <img src="tabulka-vytvaraj.png" alt="Vytváranie" style="height: 140px; width: auto">
-      </button>
-    </div>
-    <div class="level">
-      <span id="currentLevel">1.</span>
-    </div>
-    <div class="menu-right">
-      <img src="tabulka-zavazia.png" alt="Závažia" style="margin-right: 0px; margin-top: 0px;  height: 140px;">
-    </div>
-  </div>
+<div class="containerintro">
+  <h1 style="font-family: Monaco,serif; text-align: center; color: #A7877B; font-size: 52px">Váženie</h1>
 
-  <!-- Main Game Area -->
-  <div class="game-container">
-    <div class="left-panel">
-      <button id="startWeighing" style="color: #654321; margin-top: 35px; background-color: transparent; font-size: 20px;">Spusti váženie</button>
-      <button id="restartGame" style="margin-top: 35px; color: #654321; background-color: transparent; font-size: 20px;">Hraj odznova</button>
-      <button id="loadLevel" style="margin-top: 48px; color: #654321; background-color: transparent; font-size: 20px;">Načítaj level</button>
-      <button id="saveLevel" style="margin-top: 35px; color: #654321; background-color: transparent; font-size: 20px;">Ulož level</button>
+  <main>
+    <div class="intro" style="text-align: center">
+      <p>Vitajte vo Váženie, edukačný program na pochopenie konceptu váh pomocou interaktívneho prostredia!</p>
     </div>
 
-    <div class="main-area">
-      <!-- Shelves for Weights -->
-      <div class="shelves-container" id="shelves"></div>
-
-      <!-- Scale -->
-      <div class="scale-area">
-        <!-- Central Stand -->
-        <img id="scaleImage" src="vaha-stred.png" alt="Scale Stand">
-
-        <!-- Rotating Arm -->
-        <img id="rotating-arm" src="vaha-rameno.png" alt="Rotating Arm">
-
-        <!-- Left and Right Pans -->
-        <div id="left-pan" class="pan">
-          <img src="vaha-strana.png" alt="Left Pan" class="pan-image-left">
-        </div>
-
-        <div id="right-pan" class="pan">
-          <img src="vaha-strana.png" alt="Right Pan" class="pan-image-right">
-        </div>
-
-      </div>
-      <div class="task-info">
-        <p>Zadanie úlohy...</p>
-      </div>
-      <div class="table-area">
-        <img src="bylinky.png" alt="Bylinky" class="draggable-item" id="bylinky" draggable="true">
-      </div>
-
+    <div class="menu">
+      <button id="playModeButton"><img src="tabulka-hraj.png" style="width: 250px; height: auto"></button>
+      <button id="createModeButton"><img src="tabulka-vytvaraj.png" style="width: 250px; height: auto"></button>
     </div>
+  </main>
 
-
-  </div>
+  <footer>
+    <p>EduSoft2 2024/25 - Vanesa Šoošová</p>
+  </footer>
 </div>
+
+<script>
+  document.getElementById('playModeButton').addEventListener('click', function() {
+    window.location.href = 'playingmode.html';
+  });
+
+  document.getElementById('createModeButton').addEventListener('click', function() {
+    window.location.href = 'creatingmode.html';
+  });
+</script>
+</body>
+</html>
