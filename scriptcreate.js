@@ -19,6 +19,36 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "playingmode.html";
         });
     }
+    const clearWeightsButton = document.getElementById("clearWeights");
+
+    function clearAllWeights() {
+        // Remove all weight elements from shelf, left pan, and right pan
+        shelvesContainerCreateMode.innerHTML = "";
+        leftPan.innerHTML = "";
+        rightPan.innerHTML = "";
+
+        // Reset the custom weights list
+        customWeightsList = [];
+
+        // Ensure the jar is still draggable and remains in place
+        if (!document.querySelector("#bylinky")) {
+            const jar = document.createElement("img");
+            jar.src = "bylinky.png";
+            jar.style.width = "100px";
+            jar.alt = "Bylinky";
+            jar.classList.add("draggable-item");
+            jar.id = "bylinky";
+            jar.draggable = true;
+            shelvesContainerCreateMode.appendChild(jar);
+        }
+
+        // Recalculate balance after clearing
+        calculateBalance();
+    }
+
+    if (clearWeightsButton) {
+        clearWeightsButton.addEventListener("click", clearAllWeights);
+    }
     function saveCustomLevel() {
         if (!jarWeightInput.value.trim()) {
             alert("Zadajte hmotnosť byliniek!");
