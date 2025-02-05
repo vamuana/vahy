@@ -3,53 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creating Mode - Váženie</title>
+    <title>Váženie - Tvorba Levelu</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <!-- Create Header -->
+    <!-- Header Section -->
     <div class="header">
-        <button id="switchModeButton"><img src="tabulka-hraj.png" alt="Play Mode"></button>
-        <h1>Creating Mode</h1>
-        <div class="weights-header">
-            <img src="tabulka-zavazia.png" alt="Weights">
+        <div class="menu-left">
+            <button id="switchToPlayingMode" class="tabulka-button" style="cursor: pointer">
+                <img src="tabulka-hraj.png" alt="Hranie" style="height: 140px; width: auto">
+            </button>
+        </div>
+        <div class="level" style="font-size: 25px">
+            <span>Vytváranie Levelu</span>
+        </div>
+        <div class="menu-right">
+            <img src="tabulka-zavazia.png" alt="Závažia" style="margin-right: 10px; margin-top: 0px; height: 140px;">
+            <input type="number" id="weightInput" placeholder="... g" style="width: 60px; font-size: 16px; text-align: center;">
+            <button id="addCustomWeight" style="margin-left: 5px;">Pridaj závažie</button>
         </div>
     </div>
 
-    <!-- Creating Area -->
-    <div class="creating-area">
-        <div class="scale">
-            <img src="vaha-stred.png" alt="Scale">
+    <!-- Main Game Area -->
+    <div class="game-container">
+        <div class="left-panel">
+            <button id="saveCustomLevel" style="margin-top: 35px; color: #654321; background-color: transparent; font-size: 20px;">Ulož level</button>
+            <button id="clearWeights" style="margin-top: 20px; color: #654321; background-color: transparent; font-size: 20px;">Vymaž závažia</button>
         </div>
-        <div class="weights">
-            <img src="weight-1.png" alt="Weight 1" draggable="true">
-            <img src="weight-3.png" alt="Weight 3" draggable="true">
-            <img src="weight-9.png" alt="Weight 9" draggable="true">
-            <img src="weight-27.png" alt="Weight 27" draggable="true">
-            <img src="weight-81.png" alt="Weight 81" draggable="true">
-        </div>
-        <div class="task-info">
-            <p>Create your task by dragging weights onto the scale and setting a target weight for balance.</p>
-            <button id="saveTask">Save Task</button>
-            <button id="loadTask">Load Task</button>
-        </div>
-    </div>
 
-    <!-- Task Panel -->
-    <div class="panel">
-        <h2>Creating Level: <span id="level">1</span></h2>
-        <div class="level-nav">
-            <button id="previousLevel">&lt;</button>
-            <button id="nextLevel">&gt;</button>
+        <div class="main-area">
+            <!-- Shelves for Weights -->
+            <div class="shelves-container" id="shelves"></div>
+
+
+
+            <!-- Scale -->
+            <div class="scale-area">
+                <!-- Central Stand -->
+                <img id="scaleImage" src="vaha-stred.png" alt="Scale Stand">
+                <img id="rotating-arm" src="vaha-rameno.png" alt="Rotating Arm">
+                <div id="left-pan" class="pan">
+
+                </div>
+                <div id="right-pan" class="pan">
+
+                </div>
+            </div>
+
+            <div class="table-area">
+                <img src="bylinky.png" style="width: 100px" alt="Bylinky" class="draggable-item" id="bylinky" draggable="true">
+            </div>
+            <div class="task-info">
+                <p>Zadanie úlohy...</p>
+            </div>
         </div>
     </div>
 </div>
 
-<script>
-    document.getElementById('switchModeButton').addEventListener('click', function() {
-        window.location.href = 'playingmode.html';
-    });
-</script>
+<script src="scriptcreate.js"></script>
 </body>
 </html>
