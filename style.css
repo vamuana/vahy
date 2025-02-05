@@ -6,7 +6,29 @@ body {
     padding: 0;
     max-height: 100vh;
 }
+.level-navigation {
+    position: absolute;
+    top: 20px; /* Adjust the spacing from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px; /* Space between buttons */
+}
 
+.level-navigation button {
+    background-color: white;
+    color: #654321;
+    font-size: 18px;
+    padding: 10px 15px;
+    border: 2px solid #654321;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.level-navigation button:hover {
+    background-color: lightgoldenrodyellow;
+}
 .containerintro {
     width: 80%;
     max-width: 1200px;
@@ -56,7 +78,7 @@ body {
 
 .level {
     flex: 1;
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-align: center;
     color: white;
     margin-top: -50px;
@@ -220,4 +242,5 @@ body {
     color: white;
     padding: 10px 10px;
     width: fit-content;
+    z-index: 130;
 }

@@ -1,12 +1,11 @@
-doplň prekážky
-Doplň prekážky tak, aby sa mapa zaplnila vodou za presne 4 kroky.
-10001001
-00010111
-00100101
-10001001
-01010100
-10000100
-01101000
-squares
-1,4 2,3 2,4 3,3
-all
+Ako umiestniť závažia tak, aby sme vedeli odvážiť presne 11 gramov byliniek?
+1
+3
+9
+27
+81
+L
+P
+P
+M
+M
